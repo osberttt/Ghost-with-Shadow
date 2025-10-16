@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -73,6 +74,13 @@ public class PlayerController : MonoBehaviour
         if (_input.frameInput.swap)
         {
             _swapToConsume = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _isMovable = false;
+            _shadowController.transform.DOMove(transform.position + _playerLife.shadowOffset, 0.5f).OnComplete(()=>_isMovable = true);
+            latestPosition = transform.position;
         }
     }
 
